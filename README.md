@@ -3,6 +3,7 @@
 ---
 
 > This is a pair-programming project under the ALX-SE program.
+
 > The project is a first phase of the AirBnB clone - the console.
 
 
@@ -17,11 +18,9 @@ The console offers the functions to create, modify and delete the objects in the
 #### How to start it
 
 
-
 ```
 git clone https://github.com/JeremyWarui/AirBnB_clone.git
 cd AirBnB_clone
-
 ```
 
 
