@@ -1,9 +1,6 @@
 ## 0x00. AirBnB clone - The console
 
----
-
 > This is a pair-programming project under the ALX-SE program.
-
 > The project is a first phase of the AirBnB clone - the console.
 
 
