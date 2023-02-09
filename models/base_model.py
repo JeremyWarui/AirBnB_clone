@@ -40,7 +40,7 @@ class BaseModel():
         """
         Return string of info about model
         """
-        return ('[{}] ({}) {}'. format(self.__class.__name__, self.id, self.__dict__))
+        return ('[{}] ({}) {}'. format(self.__class__.__name__, self.id, self.__dict__))
     def __repr__(self):
         """
         returns string representation
@@ -62,5 +62,5 @@ class BaseModel():
                 dic[k] = v.isoformat()
             else:
                 dic[k] = v
-                return dic
+        return dic
 
