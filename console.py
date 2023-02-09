@@ -18,11 +18,10 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, line):
         """ EOF command to exit the cmd """
         return True
-    
+
     def emptyline(self):
         """ Overwrite default behavior to repeat last command"""
         pass
-
 
 
 if __name__ == '__main__':
