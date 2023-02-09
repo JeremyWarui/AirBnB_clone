@@ -9,6 +9,7 @@ Module BaseModel
 Parent of all classes
 """
 
+
 class BaseModel():
     """Base class for Airbnb clone project
     Methods:
@@ -25,9 +26,9 @@ class BaseModel():
         if kwargs:
             for key, val in kwargs.items():
                 if "created_at" == key:
-                    self.created_at = datetime.strptime(kwargs["created_at"],"%Y-%m-%dT%H:%M:%S.%f")
+                    self.created_at = datetime.strptime(kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
                 elif "updated_at" == key:
-                     self.updated_at = datetime.strptime(kwargs["updated_at"],"%Y-%m-%dT%H:%M:%S.%f")
+                    self.updated_at = datetime.strptime(kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
                 elif "__class__" == key:
                     pass
                 else:
@@ -36,21 +37,25 @@ class BaseModel():
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+
     def __str__(self):
         """
         Return string of info about model
         """
         return ('[{}] ({}) {}'. format(self.__class__.__name__, self.id, self.__dict__))
+
     def __repr__(self):
         """
         returns string representation
         """
         return (self.__str__())
+
     def save(self):
         """"
         Update instance with updated time & save to serialized file
         """
         self.updated_at = datetime.now()
+
     def to_dict(self):
         """
         Return dic with string formats of times; add class info to dic
@@ -63,4 +68,3 @@ class BaseModel():
             else:
                 dic[k] = v
         return dic
-
