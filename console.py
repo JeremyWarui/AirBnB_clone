@@ -115,14 +115,16 @@ class HBNBCommand(cmd.Cmd):
         Usage:
         update <class name> <id> <attribute name> "<attribute value>"
         """
-        if len(entry) == 0:
-            print("** class name missing **")
-            return
+        # if len(entry) == 0:
+        #     print("** class name missing **")
+        #     return
         args = entry.split(" ")
-        # cls_name = args[0]
+        cls_name = args[0]
         objs = storage.all()
 
-        if args[0] not in HBNBCommand.classes:
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
@@ -133,8 +135,8 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 3:
             print("** value missing **")
         else:
-            # obj_id = args[1]
-            name = "{}.{}".format(args[0], args[1].strip('"'))
+            obj_id = args[1]
+            name = "{}.{}".format(cls_name, obj_id)
             attr = args[2]
             value = args[3].strip("'").strip('"')
 
