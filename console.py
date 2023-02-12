@@ -123,11 +123,12 @@ class HBNBCommand(cmd.Cmd):
             name = "{}.{}".format(cls_name, obj_id)
             attr = args[2]
             value = args[3].strip("'").strip('"')
-
-            for key, val in objs.items():
-                if key == name:
-                    setattr(val, attr, value)
-                    storage.save()
+            setattr(objs[name], attr, value)
+            storage[name].save()
+            # for key, val in objs.items():
+            #     if key == name:
+            #         setattr(val, attr, value)
+            #         storage.save()
         elif len(entry) == 0:
             print("** class name missing **")
         elif args[0] not in HBNBCommand.classes:
