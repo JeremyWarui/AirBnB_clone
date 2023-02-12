@@ -91,6 +91,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, entry):
         """Print all objects or all objects of specified class"""
+
         args = entry.split(" ")
 
         if len(entry) == 0 or args[0] in HBNBCommand.classes:
@@ -118,37 +119,38 @@ class HBNBCommand(cmd.Cmd):
 
         args = entry.split(" ")
         cls_name = args[0]
+        objs = storage.all()
 
         if cls_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
+        elif ("{}.{}".format(args[0], args[1])) not in objs.keys():
+            print("** no instance found **")
         elif len(args) == 2:
             print("** attribute name missing **")
         elif len(args) == 3:
             print("** value missing **")
+        
         else:
             obj_id = args[1]
             name = "{}.{}".format(cls_name, obj_id)
             attr = args[2]
             value = args[3].strip("'").strip('"')
-            objs = storage.all()
 
             for key, val in objs.items():
                 if key == name:
                     setattr(val, attr, value)
                     storage.save()
                 return
-            print("** no instance found **")
 
     def do_count(self, cls_name):
-        """ Counts number of instances of entered class """
+        """ Displays number of instances of entered class """
         if cls_name in HBNBCommand.classes:
             counts = 0
             objs = storage.all()
-            for key in objs.keys():
-                cls = key.split(".")
-                if cls[0] == cls_name:
+            for key, val in objs.items():
+                if cls_name in key:
                     counts += 1
             print(counts)
         else:
