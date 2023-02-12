@@ -34,6 +34,13 @@ class TestState(unittest.TestCase):
         self.assertIsInstance(self.state1.created_at, datetime.datetime)
         self.assertIsInstance(self.state1.updated_at, datetime.datetime)
 
+    def test_save(self):
+        self.state1.save()
+        self.assertNotEqual(self.state1.created_at, self.state1.updated_at)
+
+    def test_to_dict(self):
+        self.assertEqual('to_dict' in dir(self.state1), True)
+
 
 if __name__ == "__main__":
     unittest.main()

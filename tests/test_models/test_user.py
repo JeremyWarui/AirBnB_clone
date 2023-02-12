@@ -41,6 +41,13 @@ class UserCase(unittest.TestCase):
         self.assertIsInstance(self.user1.created_at, datetime.datetime)
         self.assertIsInstance(self.user1.updated_at, datetime.datetime)
 
+    def test_save(self):
+        self.user1.save()
+        self.assertNotEqual(self.user1.created_at, self.user1.updated_at)
+
+    def test_to_dict(self):
+        self.assertEqual('to_dict' in dir(self.user1), True)
+
 
 if __name__ == '__main__':
     unittest.main()

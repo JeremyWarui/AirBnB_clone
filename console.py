@@ -142,8 +142,6 @@ class HBNBCommand(cmd.Cmd):
                     setattr(val, attr, value)
                     storage.save()
                 return
-        else:
-            return
 
     def do_count(self, cls_name):
         """ Displays number of instances of entered class """

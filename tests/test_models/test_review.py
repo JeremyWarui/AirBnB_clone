@@ -15,14 +15,6 @@ class TestReview(unittest.TestCase):
         cls.rev1.user_id = "Greg"
         cls.rev1.text = "Grade A"
 
-    @classmethod
-    def tearDownClass(cls):
-        del cls.rev1
-        try:
-            os.remove("file.json")
-        except FileNotFoundError:
-            pass
-
     def test_is_subclass(self):
         self.assertTrue(issubclass(self.rev1.__class__, BaseModel), True)
 

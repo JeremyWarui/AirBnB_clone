@@ -14,14 +14,6 @@ class TestCity(unittest.TestCase):
         cls.city1.name = "Raleigh"
         cls.city1.state_id = "NC"
 
-    @classmethod
-    def tearDownClass(cls):
-        del cls.city1
-        try:
-            os.remove("file.json")
-        except FileNotFoundError:
-            pass
-
     def test_is_subclass(self):
         self.assertTrue(issubclass(self.city1.__class__, BaseModel), True)
 
