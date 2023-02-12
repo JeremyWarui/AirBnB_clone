@@ -109,54 +109,61 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-        # if len(entry) == 0 or args[0] in HBNBCommand.classes:
-        #     objs = storage.all()
-        #     list_of_objs = []
-        #     for key, val in objs.items():
-        #         if args[0] in key:
-        #             list_of_objs.append(val.__str__())
-        #         else:
-        #             list_of_objs.append(val.__str__())
-        #     print(list_of_objs)
-        # else:
-        #     print("** class doesn't exist **")
-
     def do_update(self, entry):
         """
         Update if given exact object, exact attribute
         Usage:
         update <class name> <id> <attribute name> "<attribute value>"
         """
-
-        if len(entry) == 0:
+        args = tuple(entry.split())
+        if len(args) >= 4:
+            key = "{}.{}".format(args[0], args[1])
+            cast = type(eval(args[3]))
+            arg3 = args[3]
+            arg3 = arg3.strip('"')
+            arg3 = arg3.strip("'")
+            setattr(storage.all()[key], args[2], cast(arg3))
+            storage.all()[key].save()
+        elif len(args) == 0:
             print("** class name missing **")
-            return
-
-        args = entry.split(" ")
-        cls_name = args[0]
-        objs = storage.all()
-
-        if cls_name not in HBNBCommand.classes:
+        elif args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
-        elif ("{}.{}".format(args[0], args[1])) not in objs.keys():
+        elif ("{}.{}".format(args[0], args[1])) not in storage.all().keys():
             print("** no instance found **")
         elif len(args) == 2:
             print("** attribute name missing **")
-        elif len(args) == 3:
+        else:
             print("** value missing **")
-        elif len(args) >= 4:
-            obj_id = args[1]
-            name = "{}.{}".format(cls_name, obj_id)
-            attr = args[2]
-            value = args[3].strip("'").strip('"')
+        # if len(entry) == 0:
+        #     print("** class name missing **")
+        #     return
 
-            for key, val in objs.items():
-                if key == name:
-                    setattr(val, attr, value)
-                    storage.save()
-                return
+        # args = entry.split(" ")
+        # cls_name = args[0]
+        # objs = storage.all()
+
+        # if cls_name not in HBNBCommand.classes:
+        #     print("** class doesn't exist **")
+        # elif len(args) == 1:
+        #     print("** instance id missing **")
+        # elif ("{}.{}".format(args[0], args[1])) not in objs.keys():
+        #     print("** no instance found **")
+        # elif len(args) == 2:
+        #     print("** attribute name missing **")
+        # elif len(args) == 3:
+        #     print("** value missing **")
+        # elif len(args) >= 4:
+        #     obj_id = args[1]
+        #     name = "{}.{}".format(cls_name, obj_id)
+        #     attr = args[2]
+        #     value = args[3].strip("'").strip('"')
+
+        #     for key, val in objs.items():
+        #         if key == name:
+        #             setattr(val, attr, value)
+        #             storage.save()
 
     def do_count(self, cls_name):
         """ Displays number of instances of entered class """
