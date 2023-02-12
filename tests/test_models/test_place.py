@@ -23,7 +23,6 @@ class TestPlace(unittest.TestCase):
         cls.place1.longitude = 0.0
         cls.place1.amenity_ids = []
 
-
     def test_is_subclass(self):
         self.assertTrue(issubclass(self.place1.__class__, BaseModel), True)
 
