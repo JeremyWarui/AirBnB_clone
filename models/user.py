@@ -6,6 +6,7 @@
 from models.base_model import BaseModel
 import json
 
+
 class User(BaseModel):
     '''base model class'''
 
