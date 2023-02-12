@@ -115,25 +115,10 @@ class HBNBCommand(cmd.Cmd):
         Usage:
         update <class name> <id> <attribute name> "<attribute value>"
         """
-        if len(entry) == 0:
-            print("** class name missing **")
-            return
-
         args = entry.split(" ")
-        cls_name = args[0]
-        objs = storage.all()
-
-        if cls_name not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-        elif len(args) == 1:
-            print("** instance id missing **")
-        elif ("{}.{}".format(args[0], args[1])) not in objs.keys():
-            print("** no instance found **")
-        elif len(args) == 2:
-            print("** attribute name missing **")
-        elif len(args) == 3:
-            print("** value missing **")
-        else:
+        if len(args) >= 4:
+            cls_name = args[0]
+            objs = storage.all()
             obj_id = args[1]
             name = "{}.{}".format(cls_name, obj_id)
             attr = args[2]
@@ -143,6 +128,30 @@ class HBNBCommand(cmd.Cmd):
                 if key == name:
                     setattr(val, attr, value)
                     storage.save()
+        elif len(entry) == 0:
+            print("** class name missing **")
+        elif args[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
+        elif ("{}.{}".format(args[0], args[1])) not in objs.keys():
+            print("** no instance found **")
+        elif len(args) == 2:
+            print("** attribute name missing **")
+        else:
+            print("** value missing **")
+        # elif len(args) == 3:
+        #     print("** value missing **")
+        # else:
+        #     obj_id = args[1]
+        #     name = "{}.{}".format(cls_name, obj_id)
+        #     attr = args[2]
+        #     value = args[3].strip("'").strip('"')
+
+        #     for key, val in objs.items():
+        #         if key == name:
+        #             setattr(val, attr, value)
+        #             storage.save()
 
     def do_count(self, cls_name):
         """ Displays number of instances of entered class """
