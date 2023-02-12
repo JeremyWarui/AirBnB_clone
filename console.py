@@ -117,12 +117,12 @@ class HBNBCommand(cmd.Cmd):
         """
         if len(entry) == 0:
             print("** class name missing **")
-
+            return
         args = entry.split(" ")
         cls_name = args[0]
         objs = storage.all()
 
-        if cls_name not in HBNBCommand.classes:
+        if args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
@@ -140,8 +140,8 @@ class HBNBCommand(cmd.Cmd):
 
             for key, val in objs.items():
                 if key == name:
-                    setattr(val, attr, value)
-                    storage.save()
+                    setattr(val[name], attr, value)
+                    storage[name].save()
 
     def do_count(self, cls_name):
         """ Displays number of instances of entered class """
