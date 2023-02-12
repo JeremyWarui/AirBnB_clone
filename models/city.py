@@ -4,6 +4,7 @@ Module City class
 """
 from models.base_model import BaseModel
 
+
 class City(BaseModel):
     """
     Inherit from BaseModel
