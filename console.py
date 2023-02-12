@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         elif len(args) == 3:
             print("** value missing **")
-        elif len(args) >= 4:
+        elif len(args) == 4:
             obj_id = args[1]
             name = "{}.{}".format(cls_name, obj_id)
             attr = args[2]
