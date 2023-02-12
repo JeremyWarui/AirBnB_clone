@@ -84,6 +84,7 @@ class HBNBCommand(cmd.Cmd):
 
             for key, val in objs.items():
                 if key == name:
+                    del val
                     del objs[key]
                     storage.save()
                     return
