@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-'''comment'''
-from models.engine.file_storage import FilesStorage
+""" import file storage class """
+
+from models.engine.file_storage import FileStorage
 
 
 storage = FileStorage()

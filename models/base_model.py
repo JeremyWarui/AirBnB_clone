@@ -1,13 +1,11 @@
 #!/usr/bin/python3
-
-from datetime import datetime
-from uuid import uuid4
-import models
-
 """
 Module BaseModel
 Parent of all classes
 """
+from datetime import datetime
+from uuid import uuid4
+import models
 
 
 class BaseModel():
@@ -19,6 +17,7 @@ class BaseModel():
     __repr__(self)
     to_dict(self)
     """
+    
     def __init__(self, *args, **kwargs):
         """
         Initialize attributes: random uuid, dates created/updated
@@ -70,4 +69,6 @@ class BaseModel():
                 dic[k] = v.isoformat()
             else:
                 dic[k] = v
-                return dic
+
+        return dic
+
