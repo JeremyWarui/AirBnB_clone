@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         elif len(args) == 3:
             print("** value missing **")
-        elif len(args) == 4:
+        else:
             obj_id = args[1]
             name = "{}.{}".format(cls_name, obj_id)
             attr = args[2]
@@ -141,8 +141,8 @@ class HBNBCommand(cmd.Cmd):
 
             for key, val in objs.items():
                 if key == name:
-                    setattr(storage[key], attr, value)
-                    storage[key].save()
+                    setattr(val, attr, value)
+                    storage.save()
 
     def do_count(self, cls_name):
         """ Displays number of instances of entered class """
