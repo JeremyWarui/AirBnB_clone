@@ -134,7 +134,7 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
         else:
             # obj_id = args[1]
-            name = "{}.{}".format(args[0], args[1])
+            name = "{}.{}".format(args[0], args[1].strip('"'))
             attr = args[2]
             value = args[3].strip("'").strip('"')
 
