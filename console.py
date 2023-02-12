@@ -84,7 +84,6 @@ class HBNBCommand(cmd.Cmd):
 
             for key, val in objs.items():
                 if key == name:
-                    del val
                     del objs[key]
                     storage.save()
                     return
@@ -93,17 +92,14 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, entry):
         """Print all objects or all objects of specified class"""
         args = entry.split(" ")
-        objs = storage.all()
-        list_of_objs = []
 
-        if len(entry) == 0:
-            for key, val in objs.items():
-                list_of_objs.append(val.__str__())
-            print(list_of_objs)
-            
-        elif args[0] in HBNBCommand.classes:
+        if len(entry) == 0 or args[0] in HBNBCommand.classes:
+            objs = storage.all()
+            list_of_objs = []
             for key, val in objs.items():
                 if args[0] in key:
+                    list_of_objs.append(val.__str__())
+                else:
                     list_of_objs.append(val.__str__())
             print(list_of_objs)
         else:
