@@ -86,7 +86,7 @@ class HBNBCommand(cmd.Cmd):
                 if key == name:
                     del objs[key]
                     storage.save()
-                return
+                    return
             print("** no instance found **")
 
     def do_all(self, entry):
@@ -115,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
         Usage:
         update <class name> <id> <attribute name> "<attribute value>"
         """
-        if len(entry) == 0:
+        if not entry:
             print("** class name missing **")
             return
         args = entry.split(" ")
