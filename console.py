@@ -140,8 +140,9 @@ class HBNBCommand(cmd.Cmd):
 
             for key, val in objs.items():
                 if key == name:
-                    setattr(val[name], attr, value)
-                    storage[name].save()
+                    setattr(val, attr, value)
+                    storage.save()
+            return
 
     def do_count(self, cls_name):
         """ Displays number of instances of entered class """
