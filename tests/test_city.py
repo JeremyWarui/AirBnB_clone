@@ -21,7 +21,7 @@ class TestCity(unittest.TestCase):
         try:
             os.remove("file.json")
         except FileNotFoundError:
-            pass:
+            pass
 
     def test_style_check(self):
         """
