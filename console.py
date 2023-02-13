@@ -11,6 +11,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+import shlex
 
 
 class HBNBCommand(cmd.Cmd):
@@ -20,6 +21,19 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     classes = {"BaseModel", "State", "City",
                "Amenity", "Place", "Review", "User"}
+    cmds = ["create", "show", "update", "all", "destroy", "count"]
+    list_cls = ["BaseModel", "State", "City", "Amenity",
+                "Place", "Review", "User"]
+
+    def precmd(self, entry):
+        """ Parse command input """
+        if "." in entry and "(" in entry and ")" in entry:
+            cls = entry.split('.')
+            comd = cls[1].split("(")
+            args = comd[1].split(")")
+            if cls[0] in HBNBCommand.list_cls and comd[0] in HBNBCommand.cmds:
+                entry = "{} {} {}".format(comd[0], cls[0], args[0])
+        return entry
 
     def do_quit(self, line):
         """ Quit command to exit the program """
@@ -50,6 +64,7 @@ class HBNBCommand(cmd.Cmd):
         if not entry:
             print("** class name missing **")
             return
+
         args = entry.split(" ")
 
         if args[0] not in HBNBCommand.classes:
@@ -74,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
         cls_name = args[0]
 
         if cls_name not in HBNBCommand.classes:
-            print("** class doesn't exits **")
+            print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
         else:
@@ -118,7 +133,11 @@ class HBNBCommand(cmd.Cmd):
         if not entry:
             print("** class name missing **")
             return
-        args = entry.split(" ")
+        a = ""
+        for argv in entry.split(','):
+            a = a + argv
+
+        args = shlex.split(a)
         objs = storage.all()
 
         if args[0] not in HBNBCommand.classes:
