@@ -1,0 +1,10 @@
+header {
+  background-color: #ff0000;
+  height: 70px;
+  width: 100%;
+  color: white;
+  border-bottom: 1px #cccccc;
+}
+
+/* 
+logo align on left and center vertically (20px space at the left) */
